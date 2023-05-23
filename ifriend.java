@@ -2,16 +2,16 @@ import java.util.*;
 import java.time.*;
 
 public class ifriend{
-        //Global Variables
-        public static String[] contactID = new String[0];
-        public static String[] name = new String[0];
-        public static String[] tpNumber = new String[0];
-        public static String[] company = new String[0];
-        public static int[] salary = new int[0];
-        public static String[] birthday = new String[0];
+    //Global Variables
+    public static String[] contactID = new String[0];
+    public static String[] name = new String[0];
+    public static String[] tpNumber = new String[0];
+    public static String[] company = new String[0];
+    public static int[] salary = new int[0];
+    public static String[] birthday = new String[0];
         
-        //Main Method
-        public static void main(String[] args){
+    //===========Main Method===========
+    public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         printMainMenue();
         int option = input.nextInt();
@@ -26,7 +26,8 @@ public class ifriend{
 
         }
     }
-
+    
+    
     //Clear Console Method
     public final static void clearConsole() {
         try {
@@ -260,10 +261,130 @@ public class ifriend{
         if(sal<0){
             return false;
         }
+        return true;
+    }
+
+    //Extend birthday array
+    public static void extendBirthDayArray(){
+        int lengthBday = birthday.length;
+        String[] tempBday = new String[lengthBday+1];
+        for(int i=0; i<lengthBday; i++){
+            tempBday[i]=birthday[i];
+        }
+        birthday=tempBday;
+    }
+
+    //Add the birthday to the array
+    public static void addBirthday(String bday){
+        extendBirthDayArray();
+        birthday[birthday.length-1] = bday;
+    }
+ 
+    //Input the birthday and store it after validating
+    public static void printBirthday(){
+        Scanner input = new Scanner(System.in);
+        L2:do{
+            System.out.print("B'Day(YYYY-MM-DD)\t: ");
+            String bday = input.next();
+            boolean BDval = isBdayValid(bday);
+            if(isBdayValid(bday)){
+                addBirthday(bday);
+                System.out.println("\tContact has been added successfully..");
+                System.out.print("Do you want to add another Contact (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    clearConsole();
+                    addContacts(0);
+                }else if(yn.equalsIgnoreCase("N")){
+                    clearConsole();
+                    printMainMenue();
+                    int option = input.nextInt();
+            
+                    switch(option){
+                        case 1: addContacts(option); 
+                        //case 2: updateContacts(option);
+                        //case 3: deleteContacts(option);
+                        //case 4: searchContacts(option);
+                        //case 5: listContacts(option);
+                        //default: System.out.println("Thank you for using iFriend!")
+            
+                    }
+                }
+            }else{
+                System.out.println("\t\tInvalid birthday...");
+                System.out.print("Do you want to add birthday again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    System.out.print("\033[3A");
+                    System.out.print("\033[0J");
+                    continue L2;
+                }else if((yn.equalsIgnoreCase("N"))){
+                    clearConsole();
+                    printMainMenue();
+                    int option = input.nextInt();
+            
+                    switch(option){
+                        case 1: addContacts(option); 
+                        //case 2: updateContacts(option);
+                        //case 3: deleteContacts(option);
+                        //case 4: searchContacts(option);
+                        //case 5: listContacts(option);
+                        //default: System.out.println("Thank you for using iFriend!")
+            
+                    }
+                }
+            }
+        }while(true);
+
+    }
+    
+    // Validating the birthday
+    public static boolean isBdayValid(String bday) {
+        // Isolating the string related to year, month, and day (from the user input)
+        String y = bday.substring(0, 4);
+        String m = bday.substring(5, 7);
+        String d = bday.substring(8, 10);
+
+        // Converting the string to integers
+        int yy = Integer.parseInt(y);
+        int mm = Integer.parseInt(m);
+        int dd = Integer.parseInt(d);
+
+        // Taking the current year, month, and the day
+        LocalDate currentDate = LocalDate.now();
+
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
+
+        if (bday.length() != 10 || bday.charAt(4) != '-' || bday.charAt(7) != '-') {
+            return false;
+        } else if (yy < 1800 || yy > year) {
+            return false;
+        } else if (mm > 12 || mm < 1) {
+            return false;
+        } else if (dd > 31 || dd < 1) {
+            return false;
+        } else if (mm > month || dd > day) {
+            return false;
+        } else if (mm == 2 && dd > 29) { // Check for February with leap year
+            return false;
+        } else if (mm == 2 && dd == 29 && !isLeapYear(yy)) { // Check for February 29th and non-leap year
+            return false;
+        } else if (mm == 4 || mm == 6 || mm == 9 || mm == 11) { // Check for months with 30 days
+            return dd <= 30;
+        }
 
         return true;
     }
-    
+
+    // Check if a year is a leap year
+    public static boolean isLeapYear(int year) {
+        return year % 4 == 0;
+    }
+
+
+    //[01]Add Contacts Option
     public static void addContacts(int option){
         clearConsole();
         addContactsPrint();
@@ -284,15 +405,7 @@ public class ifriend{
         printSalary();
 
         //Input Birthday
-
-    
-
-
-
-
-
-
-        
+        printBirthday();  
     }
 
 
