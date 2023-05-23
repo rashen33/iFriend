@@ -131,6 +131,8 @@ public class ifriend{
         addName(enterName);
     }
 
+    //Insert code to validate the name here
+
 
     //Input the phone number and validate
     public static void printInputPhoneNumber(){
@@ -207,6 +209,60 @@ public class ifriend{
         String comp = input.next();
         addCompany(comp);  
     }
+
+    //Extend the salary array
+    public static void extendSalaryArray(){
+        int lengthSal = salary.length;
+        int[] tempSal = new int[lengthSal+1];
+        for(int i=0; i<lengthSal; i++){
+            tempSal[i]=salary[i];
+        }
+        salary=tempSal;
+    }
+
+    //Add the sarlary to the array
+    public static void addSalary(int sal){
+        extendSalaryArray();
+        salary[salary.length-1]=sal;
+    }
+
+    //Input the salary and print it after validating
+    public static void printSalary(){
+        L2:do{
+            Scanner input = new Scanner(System.in);
+            System.out.print("Salary\t\t\t: ");
+            int sal = input.nextInt();
+            boolean SALval = isSalValid(sal);
+    
+            if(isSalValid(sal)){
+                addSalary(sal);
+                break;
+            }else{
+                System.out.println("\t\tInvalid input...");
+                System.out.print("Do you want to add the salary again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    //Clears 3 rows upward
+                    System.out.print("\033[3A");
+                    //Clears the user input in the 3rd row
+                    System.out.print("\033[0J");
+                    //If the user input is "y" the code runes from the start of the do while loop labeled L1
+                    continue L2;
+                }else if(yn.equalsIgnoreCase("N")){
+                    break;
+                }
+            }
+        }while(true);
+    }
+
+    //Validation for the salary
+    public static boolean isSalValid(int sal){
+        if(sal<0){
+            return false;
+        }
+
+        return true;
+    }
     
     public static void addContacts(int option){
         clearConsole();
@@ -223,6 +279,11 @@ public class ifriend{
 
         //Input Company name
         printCompanyName();
+
+        //Input Salary
+        printSalary();
+
+        //Input Birthday
 
     
 
