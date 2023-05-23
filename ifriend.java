@@ -12,6 +12,11 @@ public class ifriend{
         
     //===========Main Method===========
     public static void main(String[] args){
+        homePage();
+    }
+    
+    //Home page Method
+    public static void homePage(){
         Scanner input = new Scanner(System.in);
         printMainMenue();
         int option = input.nextInt();
@@ -26,7 +31,6 @@ public class ifriend{
 
         }
     }
-    
     
     //Clear Console Method
     public final static void clearConsole() {
@@ -304,18 +308,7 @@ public class ifriend{
                     addContacts(0);
                 }else if(yn.equalsIgnoreCase("N")){
                     clearConsole();
-                    printMainMenue();
-                    int option = input.nextInt();
-            
-                    switch(option){
-                        case 1: addContacts(option); 
-                        //case 2: updateContacts(option);
-                        //case 3: deleteContacts(option);
-                        //case 4: searchContacts(option);
-                        //case 5: listContacts(option);
-                        //default: System.out.println("Thank you for using iFriend!")
-            
-                    }
+                    homePage();
                 }
             }else{
                 System.out.println("\t\tInvalid birthday...");
@@ -327,18 +320,7 @@ public class ifriend{
                     continue L2;
                 }else if((yn.equalsIgnoreCase("N"))){
                     clearConsole();
-                    printMainMenue();
-                    int option = input.nextInt();
-            
-                    switch(option){
-                        case 1: addContacts(option); 
-                        //case 2: updateContacts(option);
-                        //case 3: deleteContacts(option);
-                        //case 4: searchContacts(option);
-                        //case 5: listContacts(option);
-                        //default: System.out.println("Thank you for using iFriend!")
-            
-                    }
+                    homePage();
                 }
             }
         }while(true);
