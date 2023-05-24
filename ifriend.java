@@ -148,15 +148,64 @@ public class ifriend{
             case 1: nameUpdate(index); break;
             case 2: phoneNumberUpdate(index); break;
             case 3: companyNameUpdate(index); break;
-            //case 4: sarlary(index); break;
+            case 4: sarlaryUpdate(index); break;
         }
     }
 
+    //====(04)Update the Salary Method======
+    public static void sarlaryUpdate(int index){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nUpdate the Salary");
+        System.out.println("====================");
+        //Input sal, validate and update
+        addUpdatedSalary(index);
+        System.out.println("\n");
+        System.out.println("\tSalary has been updated successfully...");        
+        System.out.println("\n");
+        System.out.print("Do you want to update another contact (Y/N) -> ");
+        String yn = input.next();
+        if(yn.equalsIgnoreCase("Y")){
+            clearConsole();
+            updateContacts(index);
+        }else if((yn.equalsIgnoreCase("N"))){
+            clearConsole();
+            homePage();
+        }
+    }
+
+    public static void addUpdatedSalary(int index){
+        L2:do{
+            Scanner input = new Scanner(System.in);
+            System.out.print("Enter the updated salary\t: ");
+            int sal = input.nextInt();
+            boolean SALval = isSalValid(sal);
+
+            if(isSalValid(sal)){
+                salary[index]=sal;
+                break;
+            }else{
+                System.out.println("\t\tInvalid input...");
+                System.out.print("Do you want to update the salary again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    //Clears 3 rows upward
+                    System.out.print("\033[3A");
+                    //Clears the user input in the 3rd row
+                    System.out.print("\033[0J");
+                    //If the user input is "y" the code runes from the start of the do while loop labeled L1
+                    continue L2;
+                }else if(yn.equalsIgnoreCase("N")){
+                    break;
+                }
+            }
+        }while(true);
+    }
+    
     //====(03)Update the Compnay Name Method======
     public static void companyNameUpdate(int index){
         Scanner input = new Scanner(System.in);
         System.out.println("\nUpdate the Compnay Name");
-        System.out.println("===========");
+        System.out.println("==========================");
         System.out.print("Input new compnay name - ");
         String getUserInput = input.next();
         company[index] = getUserInput;
@@ -178,7 +227,7 @@ public class ifriend{
     public static void phoneNumberUpdate(int index){
         Scanner input = new Scanner(System.in);
         System.out.println("\nUpdate Phone Number");
-        System.out.println("===========");
+        System.out.println("=======================");
         //Add new tp number and validate
         addUpdatedPhoneNumber(index);
         System.out.println("\n");
@@ -199,7 +248,7 @@ public class ifriend{
     public static void addUpdatedPhoneNumber(int index){
         Scanner input = new Scanner(System.in);
         L1:do{
-            System.out.print("Enter new Phone Number\t\t: ");
+            System.out.print("Enter new Phone Number\t: ");
             String phoneNumber = input.next();
             boolean PNvalid = isValidPhoneNumber(phoneNumber);
     
@@ -231,7 +280,7 @@ public class ifriend{
     public static void nameUpdate(int index){
         Scanner input = new Scanner(System.in);
         System.out.println("\nUpdate Name");
-        System.out.println("===========");
+        System.out.println("===============");
         System.out.print("Input new name - ");
         String getUserInput = input.next();
         name[index] = getUserInput;
