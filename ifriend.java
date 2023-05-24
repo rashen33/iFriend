@@ -63,7 +63,7 @@ public class ifriend{
         System.out.print("Enter an option to contuniue -> ");
     }
     
-    //=====================Methods related to UPDATE option=======================
+    //=====================[02]Methods related to UPDATE option=======================
     
     public static void updateContactsPrint(){
         System.out.println("+---------------------------------------------------+");
@@ -76,14 +76,36 @@ public class ifriend{
         clearConsole();
         updateContactsPrint();
 
-        int index = searchContByUserInput();
-        printSearchedContact(index);
+        printSearchedContact();
+        //Searching the contact by the userinput and finding the index of that contact
+        //int index = searchContByUserInput();
+        
+        //Printing the Searched Contact
+       // printUserSearchedContact(index);
 
         
     }
 
-    public static void printSearchedContact(int index){
-        if(index != -1){
+    public static void printSearchedContact(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Search Contact by Name or Phone Number - ");
+        String userInput = input.next();
+
+        int index = 0;
+        for(int i=0; i<name.length; i++){
+            if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
+                index = i;
+            }
+        }
+
+        if(isValidSearch(index)){
+            printUserSearchedContact(index);
+        }
+
+            
+     }
+
+    public static void printUserSearchedContact(int index){
             System.out.println("\n");
             System.out.println("\tContact ID\t\t: " + contactID[index]);
             System.out.println("\tName\t\t\t: " + name[index]);
@@ -91,20 +113,14 @@ public class ifriend{
             System.out.println("\tCompany Name\t\t: " + company[index]);
             System.out.println("\tSalary\t\t\t: " + salary[index]);
             System.out.println("\tB'Day(YYYY-MM-DD)\t: " + birthday[index]);
-        }
     }
-    
-    
-    public static int searchContByUserInput(){
-        Scanner input = new Scanner(System.in);
-        System.out.print("Search Contact by Name or Phone Number - ");
-        String userInput = input.next();
-        for(int i=0; i<name.length; i++){
-            if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
-                return i;
-            }
+   
+
+    public static boolean isValidSearch(int index){
+        if(index >= 0){
+            return true;
         }
-        return -1;
+        return false;
     }
     
     
