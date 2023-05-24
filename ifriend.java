@@ -76,22 +76,37 @@ public class ifriend{
         clearConsole();
         updateContactsPrint();
 
-        printSearchedContact();
+        String getUserIn = getUserInput();
+        //Search and print the user input contact
+        printSearchedContact(getUserIn);
+
+        updateContactOptionsPrint();
+
+        //Getting the index of the user serached array
+        int index = returnIndex(getUserIn);
+        
+        updateContactOptionSelect(index);
+
+
       
     }
 
+    public static String getUserInput(){
+        Scanner input = new Scanner(System.in);            
+        System.out.print("Search Contact by Name or Phone Number - ");
+        String userInput = input.next();
+        return userInput;
+    }
+    
     //Take the user input
     //Search the name and store the index in a variable
     //If the index is valid print or else take another input by the user
-    public static void printSearchedContact(){
+    public static void printSearchedContact(String getUserIn){
         Scanner input = new Scanner(System.in);
         L1:do{
-            System.out.print("Search Contact by Name or Phone Number - ");
-            String userInput = input.next();
-    
             int index = 0;
             for(int i=0; i<name.length; i++){
-                if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
+                if( name[i].equalsIgnoreCase(getUserIn) || tpNumber[i].equals(getUserIn)){
                     index = i;
                 }
                 else{
@@ -117,6 +132,93 @@ public class ifriend{
         }while(true);          
      }
 
+    public static void updateContactOptionsPrint(){
+        System.out.println("\tWhat do you want to update...\n");
+        System.out.println("\t[01] Name");
+        System.out.println("\t[02] Phone Number");
+        System.out.println("\t[03] Comapny Name");
+        System.out.println("\t[04] Salary");
+        System.out.println("\n");
+    }
+
+    public static void updateContactOptionSelect(int index){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter an option to continue -> ");
+        int opS = input.nextInt();
+
+        switch(opS){
+            case 1: nameUpdate(index); break;
+            case 2: phoneNumberUpdate(index); break;
+            //case 3: companyNameUpdate(index); break;
+            //case 4: sarlary(index); break;
+        }
+    }
+
+    //====(02)Update Phone Number Method======
+    public static void phoneNumberUpdate(int index){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nUpdate Phone Number");
+        System.out.println("===========");
+        //Add new tp number and validate
+        addUpdatedPhoneNumber(index);
+        System.out.println("\n");
+        System.out.println("\tPhone number has been updated successfully...");
+    }
+    
+
+    public static void addUpdatedPhoneNumber(int index){
+        Scanner input = new Scanner(System.in);
+        L1:do{
+            System.out.print("Enter new Phone Number\t\t: ");
+            String phoneNumber = input.next();
+            boolean PNvalid = isValidPhoneNumber(phoneNumber);
+    
+            if(isValidPhoneNumber(phoneNumber)){
+                tpNumber[index]=phoneNumber;
+                break;
+            }else{
+                System.out.println("\t\tInvalid phone number...");
+                System.out.print("Do you want to add phone number again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    //Clears 3 rows upward
+                    System.out.print("\033[3A");
+                    //Clears the user input in the 3rd row
+                    System.out.print("\033[0J");
+                    //If the user input is "y" the code runes from the start of the do while loop labeled L1
+                    continue L1;
+                }else if(yn.equalsIgnoreCase("N")){
+                    //clearConsole();
+                    break;
+                }
+            }
+        }while(true);
+    }
+        
+        
+        
+    //====(01)Update Name Method======
+    public static void nameUpdate(int index){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nUpdate Name");
+        System.out.println("===========");
+        System.out.print("Input new name - ");
+        String getUserInput = input.next();
+        name[index] = getUserInput;
+        System.out.println("\n");
+        System.out.println("\tName has been updated successfully...");
+        //updatedNamePrint(ind);
+    }
+
+    public static int returnIndex(String userInput){
+        for(int i=0; i<name.length; i++){
+            if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     public static void printUserSearchedContact(int index){
             System.out.println("\n");
             System.out.println("\tContact ID\t\t: " + contactID[index]);
@@ -125,6 +227,7 @@ public class ifriend{
             System.out.println("\tCompany Name\t\t: " + company[index]);
             System.out.println("\tSalary\t\t\t: " + salary[index]);
             System.out.println("\tB'Day(YYYY-MM-DD)\t: " + birthday[index]);
+            System.out.println("\n");
     }
    
 
