@@ -77,32 +77,44 @@ public class ifriend{
         updateContactsPrint();
 
         printSearchedContact();
-        //Searching the contact by the userinput and finding the index of that contact
-        //int index = searchContByUserInput();
-        
-        //Printing the Searched Contact
-       // printUserSearchedContact(index);
-
-        
+      
     }
 
+    //Take the user input
+    //Search the name and store the index in a variable
+    //If the index is valid print or else take another input by the user
     public static void printSearchedContact(){
         Scanner input = new Scanner(System.in);
-        System.out.print("Search Contact by Name or Phone Number - ");
-        String userInput = input.next();
-
-        int index = 0;
-        for(int i=0; i<name.length; i++){
-            if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
-                index = i;
+        L1:do{
+            System.out.print("Search Contact by Name or Phone Number - ");
+            String userInput = input.next();
+    
+            int index = 0;
+            for(int i=0; i<name.length; i++){
+                if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
+                    index = i;
+                }
+                else{
+                    index = -1;
+                }
             }
-        }
-
-        if(isValidSearch(index)){
-            printUserSearchedContact(index);
-        }
-
-            
+    
+            if(isValidSearch(index)){
+                printUserSearchedContact(index);
+                break;
+            }else{
+                System.out.println("\t\tInvalid input...");
+                System.out.print("Do you want to Search again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    System.out.print("\033[3A");
+                    System.out.print("\033[0J");
+                    continue L1;
+                }else if(yn.equalsIgnoreCase("N")){
+                    break;
+                }
+            }
+        }while(true);          
      }
 
     public static void printUserSearchedContact(int index){
@@ -117,7 +129,7 @@ public class ifriend{
    
 
     public static boolean isValidSearch(int index){
-        if(index >= 0){
+        if(index != -1){
             return true;
         }
         return false;
