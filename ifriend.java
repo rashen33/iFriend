@@ -101,7 +101,6 @@ public class ifriend{
     //If the index is valid print or else take another input by the user
     public static void printSearchedContact(String getUserIn){
         Scanner input = new Scanner(System.in);
-        L1:do{
             int index = 0;
             for(int i=0; i<name.length; i++){
                 if( name[i].equalsIgnoreCase(getUserIn) || tpNumber[i].equals(getUserIn)){
@@ -114,20 +113,16 @@ public class ifriend{
     
             if(isValidSearch(index)){
                 printUserSearchedContact(index);
-                break;
             }else{
                 System.out.println("\t\tInvalid input...");
                 System.out.print("Do you want to Search again (Y/N) : ");
                 String yn = input.next();
                 if(yn.equalsIgnoreCase("Y")){
-                    System.out.print("\033[3A");
-                    System.out.print("\033[0J");
-                    continue L1;
+                    updateContacts(index);
                 }else if(yn.equalsIgnoreCase("N")){
-                    break;
+                    homePage();
                 }
-            }
-        }while(true);          
+            }         
      }
 
     public static void updateContactOptionsPrint(){
