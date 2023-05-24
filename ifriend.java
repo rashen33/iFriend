@@ -7,7 +7,7 @@ public class ifriend{
     public static String[] name = new String[0];
     public static String[] tpNumber = new String[0];
     public static String[] company = new String[0];
-    public static int[] salary = new int[0];
+    public static double[] salary = new double[0];
     public static String[] birthday = new String[0];
         
     //===========Main Method===========
@@ -172,7 +172,7 @@ public class ifriend{
         L2:do{
             Scanner input = new Scanner(System.in);
             System.out.print("Enter the updated salary\t: ");
-            int sal = input.nextInt();
+            double sal = input.nextDouble();
             boolean SALval = isSalValid(sal);
 
             if(isSalValid(sal)){
@@ -475,7 +475,7 @@ public class ifriend{
         company[company.length-1]=comp;
     }
 
-    //Input a company name (No validations)
+    //-----!!!!!----Input a company name (No validations)
     public static void printCompanyName(){
         Scanner input = new Scanner(System.in);
         System.out.print("Compnay\t\t\t: ");
@@ -486,7 +486,7 @@ public class ifriend{
     //Extend the salary array
     public static void extendSalaryArray(){
         int lengthSal = salary.length;
-        int[] tempSal = new int[lengthSal+1];
+        double[] tempSal = new double[lengthSal+1];
         for(int i=0; i<lengthSal; i++){
             tempSal[i]=salary[i];
         }
@@ -494,7 +494,7 @@ public class ifriend{
     }
 
     //Add the sarlary to the array
-    public static void addSalary(int sal){
+    public static void addSalary(double sal){
         extendSalaryArray();
         salary[salary.length-1]=sal;
     }
@@ -504,7 +504,7 @@ public class ifriend{
         L2:do{
             Scanner input = new Scanner(System.in);
             System.out.print("Salary\t\t\t: ");
-            int sal = input.nextInt();
+            double sal = input.nextDouble();
             boolean SALval = isSalValid(sal);
     
             if(isSalValid(sal)){
@@ -529,7 +529,7 @@ public class ifriend{
     }
 
     //Validation for the salary
-    public static boolean isSalValid(int sal){
+    public static boolean isSalValid(double sal){
         if(sal<0){
             return false;
         }
