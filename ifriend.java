@@ -86,9 +86,7 @@ public class ifriend{
         int index = returnIndex(getUserIn);
         
         updateContactOptionSelect(index);
-
-
-      
+   
     }
 
     public static String getUserInput(){
@@ -149,8 +147,30 @@ public class ifriend{
         switch(opS){
             case 1: nameUpdate(index); break;
             case 2: phoneNumberUpdate(index); break;
-            //case 3: companyNameUpdate(index); break;
+            case 3: companyNameUpdate(index); break;
             //case 4: sarlary(index); break;
+        }
+    }
+
+    //====(03)Update the Compnay Name Method======
+    public static void companyNameUpdate(int index){
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nUpdate the Compnay Name");
+        System.out.println("===========");
+        System.out.print("Input new compnay name - ");
+        String getUserInput = input.next();
+        company[index] = getUserInput;
+        System.out.println("\n");
+        System.out.println("\tComany name has been updated successfully...");
+        System.out.println("\n");
+        System.out.print("Do you want to update another contact (Y/N) -> ");
+        String yn = input.next();
+        if(yn.equalsIgnoreCase("Y")){
+            clearConsole();
+            updateContacts(index);
+        }else if((yn.equalsIgnoreCase("N"))){
+            clearConsole();
+            homePage();
         }
     }
 
@@ -162,7 +182,17 @@ public class ifriend{
         //Add new tp number and validate
         addUpdatedPhoneNumber(index);
         System.out.println("\n");
-        System.out.println("\tPhone number has been updated successfully...");
+        System.out.println("\tPhone number has been updated successfully...");        
+        System.out.println("\n");
+        System.out.print("Do you want to update another contact (Y/N) -> ");
+        String yn = input.next();
+        if(yn.equalsIgnoreCase("Y")){
+            clearConsole();
+            updateContacts(index);
+        }else if((yn.equalsIgnoreCase("N"))){
+            clearConsole();
+            homePage();
+        }
     }
     
 
@@ -208,6 +238,17 @@ public class ifriend{
         System.out.println("\n");
         System.out.println("\tName has been updated successfully...");
         //updatedNamePrint(ind);
+        System.out.println("\n");
+        System.out.print("Do you want to update another contact (Y/N) -> ");
+        String yn = input.next();
+        if(yn.equalsIgnoreCase("Y")){
+            clearConsole();
+            updateContacts(index);
+        }else if((yn.equalsIgnoreCase("N"))){
+            clearConsole();
+            homePage();
+        }
+        
     }
 
     public static int returnIndex(String userInput){
@@ -239,7 +280,7 @@ public class ifriend{
     }
     
     
-    //=====================Methods related to ADD CONTACTS option=======================
+    //=====================[01]Methods related to ADD CONTACTS option=======================
     //Add Contacts Print Method
     public static void addContactsPrint(){
         System.out.println("+---------------------------------------------------+");
