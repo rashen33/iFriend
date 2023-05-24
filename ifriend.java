@@ -22,8 +22,8 @@ public class ifriend{
         int option = input.nextInt();
 
         switch(option){
-            case 1: addContacts(option); 
-            //case 2: updateContacts(option);
+            case 1: addContacts(option); break;
+            case 2: updateContacts(option); break;
             //case 3: deleteContacts(option);
             //case 4: searchContacts(option);
             //case 5: listContacts(option);
@@ -63,6 +63,52 @@ public class ifriend{
         System.out.print("Enter an option to contuniue -> ");
     }
     
+    //=====================Methods related to UPDATE option=======================
+    
+    public static void updateContactsPrint(){
+        System.out.println("+---------------------------------------------------+");
+		System.out.println("|                  UPDATE Contact                   |");
+		System.out.println("+---------------------------------------------------+");
+
+    }
+
+    public static void updateContacts(int option){
+        clearConsole();
+        updateContactsPrint();
+
+        int index = searchContByUserInput();
+        printSearchedContact(index);
+
+        
+    }
+
+    public static void printSearchedContact(int index){
+        if(index != -1){
+            System.out.println("\n");
+            System.out.println("\tContact ID\t\t: " + contactID[index]);
+            System.out.println("\tName\t\t\t: " + name[index]);
+            System.out.println("\tPhone Number\t\t: " + tpNumber[index]);
+            System.out.println("\tCompany Name\t\t: " + company[index]);
+            System.out.println("\tSalary\t\t\t: " + salary[index]);
+            System.out.println("\tB'Day(YYYY-MM-DD)\t: " + birthday[index]);
+        }
+    }
+    
+    
+    public static int searchContByUserInput(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Search Contact by Name or Phone Number - ");
+        String userInput = input.next();
+        for(int i=0; i<name.length; i++){
+            if( name[i].equalsIgnoreCase(userInput) || tpNumber[i].equals(userInput)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    
+    //=====================Methods related to ADD CONTACTS option=======================
     //Add Contacts Print Method
     public static void addContactsPrint(){
         System.out.println("+---------------------------------------------------+");
@@ -136,7 +182,6 @@ public class ifriend{
         addName(enterName);
     }
 
-    //Insert code to validate the name here
 
 
     //Input the phone number and validate
@@ -306,9 +351,11 @@ public class ifriend{
                 if(yn.equalsIgnoreCase("Y")){
                     clearConsole();
                     addContacts(0);
+                    break;
                 }else if(yn.equalsIgnoreCase("N")){
                     clearConsole();
                     homePage();
+                    break;
                 }
             }else{
                 System.out.println("\t\tInvalid birthday...");
@@ -321,6 +368,7 @@ public class ifriend{
                 }else if((yn.equalsIgnoreCase("N"))){
                     clearConsole();
                     homePage();
+                    break;
                 }
             }
         }while(true);
@@ -346,21 +394,21 @@ public class ifriend{
         int month = currentDate.getMonthValue();
         int day = currentDate.getDayOfMonth();
 
-        if (bday.length() != 10 || bday.charAt(4) != '-' || bday.charAt(7) != '-') {
+        if(bday.length() != 10 || bday.charAt(4) != '-' || bday.charAt(7) != '-') {
             return false;
-        } else if (yy < 1800 || yy > year) {
+        }else if (yy < 1800 || yy > year) {
             return false;
-        } else if (mm > 12 || mm < 1) {
+        }else if (mm > 12 || mm < 1) {
             return false;
-        } else if (dd > 31 || dd < 1) {
+        }else if (dd > 31 || dd < 1) {
             return false;
-        } else if (mm > month || dd > day) {
+        }else if (mm > month || dd > day) {
             return false;
-        } else if (mm == 2 && dd > 29) { // Check for February with leap year
+        }else if (mm == 2 && dd > 29) { // Check for February with leap year
             return false;
-        } else if (mm == 2 && dd == 29 && !isLeapYear(yy)) { // Check for February 29th and non-leap year
+        }else if (mm == 2 && dd == 29 && !isLeapYear(yy)) { // Check for February 29th and non-leap year
             return false;
-        } else if (mm == 4 || mm == 6 || mm == 9 || mm == 11) { // Check for months with 30 days
+        }else if (mm == 4 || mm == 6 || mm == 9 || mm == 11) { // Check for months with 30 days
             return dd <= 30;
         }
 
@@ -396,9 +444,6 @@ public class ifriend{
         //Input Birthday
         printBirthday();  
     }
-
-
-
 
 
 }
