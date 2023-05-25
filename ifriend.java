@@ -69,12 +69,42 @@ public class ifriend{
     public static int searchContactsToDelete(){
         String getUserIn = getUserInput();
         //Search and print the user input contact
-        printSearchedContact(getUserIn);        
+        printSearchedContactToDel(getUserIn);        
         //updateContactOptionsPrint();        
         //Getting the index of the user serached array
         return returnIndex(getUserIn);
     }
 
+        //Take the user input
+    //Search the name and store the index in a variable
+    //If the index is valid print or else take another input by the user
+    public static void printSearchedContactToDel(String getUserIn){
+        Scanner input = new Scanner(System.in);
+            int index = 0;
+            for(int i=0; i<name.length; i++){
+                if( name[i].equalsIgnoreCase(getUserIn) || tpNumber[i].equals(getUserIn)){
+                    index = i;
+                }
+                else{
+                    index = -1;
+                }
+            }
+    
+            if(isValidSearch(index)){
+                printUserSearchedContact(index);
+            }else{
+                System.out.println("\t\tNo contact found for " + getUserIn + " ...");
+                System.out.print("Do you want to Search again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    clearConsole();
+                    deleteContacts(index);
+                }else if(yn.equalsIgnoreCase("N")){
+                    homePage();
+                }
+            }         
+     }
+    
     public static void deleteContDetails(int index){
         
         deleteCID(index);
