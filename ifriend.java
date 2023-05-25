@@ -72,13 +72,37 @@ public class ifriend{
 
     }
 
-    public static void searchContacts(int option){
+    public static void printSearchedContOption(String getUserIn){
+        Scanner input = new Scanner(System.in);
+            int index = -1;
+            for(int i=0; i<name.length; i++){
+                if( name[i].equalsIgnoreCase(getUserIn) || tpNumber[i].equals(getUserIn)){
+                    index = i;
+                }
+            }
+    
+            if(index != -1){
+                printUserSearchedContact(index);
+            }else{
+                System.out.println("\t\tNo contact found for " + getUserIn + " ...");
+                System.out.print("Do you want to Search again (Y/N) : ");
+                String yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    clearConsole();
+                    searchContacts(index);
+                }else if(yn.equalsIgnoreCase("N")){
+                    homePage();
+                }
+            }         
+     }
+     
+     public static void searchContacts(int option){
         clearConsole();
         L1:do{
             Scanner input = new Scanner(System.in);            
             searchContactsPrint();
             String userIn = getUserInput();
-            printSearchedContact(userIn);
+            printSearchedContOption(userIn);
             System.out.println("\n");
             System.out.print("Do you want to search another contact (Y/N) -> ");
             String yn = input.next();
