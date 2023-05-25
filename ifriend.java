@@ -85,12 +85,10 @@ public class ifriend{
                 if( name[i].equalsIgnoreCase(getUserIn) || tpNumber[i].equals(getUserIn)){
                     index = i;
                 }
-                else{
-                    index = -1;
-                }
+
             }
     
-            if(isValidSearch(index)){
+            if(index != -1){
                 printUserSearchedContact(index);
             }else{
                 System.out.println("\t\tNo contact found for " + getUserIn + " ...");
@@ -270,17 +268,14 @@ public class ifriend{
     //If the index is valid print or else take another input by the user
     public static void printSearchedContact(String getUserIn){
         Scanner input = new Scanner(System.in);
-            int index = 0;
+            int index = -1;
             for(int i=0; i<name.length; i++){
                 if( name[i].equalsIgnoreCase(getUserIn) || tpNumber[i].equals(getUserIn)){
                     index = i;
                 }
-                else{
-                    index = -1;
-                }
             }
     
-            if(isValidSearch(index)){
+            if(index != -1){
                 printUserSearchedContact(index);
             }else{
                 System.out.println("\t\tNo contact found for " + getUserIn + " ...");
