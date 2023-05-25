@@ -25,7 +25,7 @@ public class ifriend{
             case 1: addContacts(option); break;
             case 2: updateContacts(option); break;
             case 3: deleteContacts(option); break;
-            //case 4: searchContacts(option); break;
+            case 4: searchContacts(option); break;
             //case 5: listContacts(option); break;
             default: System.out.println("\t\tThank you for using iFriend!");
 
@@ -63,6 +63,37 @@ public class ifriend{
         System.out.print("Enter an option to contuniue -> ");
     }
     
+    //=====================[04]Methods related to SEARCH CONTACTS option=======================
+    
+    public static void searchContactsPrint(){
+        System.out.println("+---------------------------------------------------+");
+		System.out.println("|                  SEAECH Contact                   |");
+		System.out.println("+---------------------------------------------------+");
+
+    }
+
+    public static void searchContacts(int option){
+        clearConsole();
+        L1:do{
+            Scanner input = new Scanner(System.in);            
+            searchContactsPrint();
+            String userIn = getUserInput();
+            printSearchedContact(userIn);
+            System.out.println("\n");
+            System.out.print("Do you want to search another contact (Y/N) -> ");
+            String yn = input.next();
+            if(yn.equalsIgnoreCase("Y")){
+                clearConsole();
+                continue L1;
+            }else if(yn.equalsIgnoreCase("N")){
+                clearConsole();
+                homePage();
+                break;
+            }
+        }while(true);
+    }
+
+
     //=====================[03]Methods related to DELETE CONTACTS option=======================
     
     //==========Search contacts,display and return index==============
@@ -75,7 +106,7 @@ public class ifriend{
         return returnIndex(getUserIn);
     }
 
-        //Take the user input
+    //Take the user input
     //Search the name and store the index in a variable
     //If the index is valid print or else take another input by the user
     public static void printSearchedContactToDel(String getUserIn){
@@ -96,15 +127,14 @@ public class ifriend{
                 String yn = input.next();
                 if(yn.equalsIgnoreCase("Y")){
                     clearConsole();
-                    deleteContacts(index);
+                    searchContactsToDelete();
                 }else if(yn.equalsIgnoreCase("N")){
                     homePage();
                 }
             }         
      }
     
-    public static void deleteContDetails(int index){
-        
+    public static void deleteContDetails(int index){     
         deleteCID(index);
         deleteName(index);
         deleteTPNumber(index);
@@ -126,20 +156,22 @@ public class ifriend{
             deleteContactsPrint();
 
             //Search the contact and return the index of the contact to the delete contact method
-            int indox = searchContactsToDelete();
+            int index = searchContactsToDelete();
+            printSearchedContact(getUserInput());
     
             System.out.print("Do you want to delete this Contact (Y/N) : ");
             Scanner input = new Scanner(System.in);
-            String yn = input.next();
-    
+            String yn = input.next();    
             if(yn.equalsIgnoreCase("Y")){
-                deleteContDetails(indox);
+                deleteContDetails(index);
                 System.out.println("\tContact has been deleted successfully...\n");
                 System.out.print("Do you want to delete another Contact (Y/N) : ");
                 yn = input.next();
                 if(yn.equalsIgnoreCase("Y")){
+                    clearConsole();
                     continue L1;
                 }else if(yn.equalsIgnoreCase("N")){
+                    clearConsole();
                     homePage();
                     break;
                 }
@@ -150,10 +182,6 @@ public class ifriend{
 
             }
         }while(true);
-
-
-
-
     }
    
     public static void deleteCID(int index){
