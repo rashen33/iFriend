@@ -24,10 +24,10 @@ public class ifriend{
         switch(option){
             case 1: addContacts(option); break;
             case 2: updateContacts(option); break;
-            //case 3: deleteContacts(option);
-            //case 4: searchContacts(option);
-            //case 5: listContacts(option);
-            //default: System.out.println("Thank you for using iFriend!")
+            case 3: deleteContacts(option); break;
+            //case 4: searchContacts(option); break;
+            //case 5: listContacts(option); break;
+            default: System.out.println("\t\tThank you for using iFriend!");
 
         }
     }
@@ -63,6 +63,145 @@ public class ifriend{
         System.out.print("Enter an option to contuniue -> ");
     }
     
+    //=====================[03]Methods related to DELETE CONTACTS option=======================
+    
+    //==========Search contacts,display and return index==============
+    public static int searchContactsToDelete(){
+        String getUserIn = getUserInput();
+        //Search and print the user input contact
+        printSearchedContact(getUserIn);        
+        //updateContactOptionsPrint();        
+        //Getting the index of the user serached array
+        return returnIndex(getUserIn);
+    }
+
+    public static void deleteContDetails(int index){
+        
+        deleteCID(index);
+        deleteName(index);
+        deleteTPNumber(index);
+        deleteCompany(index);
+        deleteSalary(index);
+        deleteBday(index);
+    }
+    
+    public static void deleteContactsPrint(){
+        System.out.println("+---------------------------------------------------+");
+		System.out.println("|                  DELETE Contact                   |");
+		System.out.println("+---------------------------------------------------+");
+
+    }
+    
+    public static void deleteContacts(int option){
+        clearConsole();
+        L1:do{
+            deleteContactsPrint();
+
+            //Search the contact and return the index of the contact to the delete contact method
+            int indox = searchContactsToDelete();
+    
+            System.out.print("Do you want to delete this Contact (Y/N) : ");
+            Scanner input = new Scanner(System.in);
+            String yn = input.next();
+    
+            if(yn.equalsIgnoreCase("Y")){
+                deleteContDetails(indox);
+                System.out.println("\tContact has been deleted successfully...\n");
+                System.out.print("Do you want to delete another Contact (Y/N) : ");
+                yn = input.next();
+                if(yn.equalsIgnoreCase("Y")){
+                    continue L1;
+                }else if(yn.equalsIgnoreCase("N")){
+                    homePage();
+                    break;
+                }
+            }else if(yn.equalsIgnoreCase("N")){
+                clearConsole();
+                homePage();
+                break;
+
+            }
+        }while(true);
+
+
+
+
+    }
+   
+    public static void deleteCID(int index){
+        for(int i=index; i<contactID.length-1; i++){
+            contactID[i] = contactID[i+1];
+        }
+        String[] temp = new String[contactID.length-1];
+
+        for(int j=0; j<temp.length; j++){
+            temp[j] = contactID[j];
+        }
+        contactID = temp;
+    }
+    
+    public static void deleteName(int index){
+        for(int i=index; i<name.length-1; i++){
+            name[i] = contactID[i+1];
+        }
+        String[] temp = new String[name.length-1];
+
+        for(int j=0; j<temp.length; j++){
+            temp[j] = name[j];
+        }
+        name = temp;
+    }
+
+    public static void deleteTPNumber(int index){
+        for(int i=index; i<tpNumber.length-1; i++){
+            tpNumber[i] = tpNumber[i+1];
+        }
+        String[] temp = new String[tpNumber.length-1];
+
+        for(int j=0; j<temp.length; j++){
+            temp[j] = tpNumber[j];
+        }
+        tpNumber = temp;
+    }
+
+    public static void deleteCompany(int index){
+        for(int i=index; i<company.length-1; i++){
+            company[i] = company[i+1];
+        }
+        String[] temp = new String[company.length-1];
+
+        for(int j=0; j<temp.length; j++){
+            temp[j] = company[j];
+        }
+        company = temp;
+    }
+
+    public static void deleteSalary(int index){
+        for(int i=index; i<salary.length-1; i++){
+            salary[i] = salary[i+1];
+        }
+        double[] temp = new double[salary.length-1];
+
+        for(int j=0; j<temp.length; j++){
+            temp[j] = salary[j];
+        }
+        salary = temp;
+    }
+
+    public static void deleteBday(int index){
+        for(int i=index; i<birthday.length-1; i++){
+            birthday[i] = birthday[i+1];
+        }
+        String[] temp = new String[birthday.length-1];
+
+        for(int j=0; j<temp.length; j++){
+            temp[j] = birthday[j];
+        }
+        birthday = temp;
+    }
+    
+   
+   
     //=====================[02]Methods related to UPDATE option=======================
     
     public static void updateContactsPrint(){
@@ -71,7 +210,7 @@ public class ifriend{
 		System.out.println("+---------------------------------------------------+");
 
     }
-
+   
     public static void updateContacts(int option){
         clearConsole();
         updateContactsPrint();
@@ -114,7 +253,7 @@ public class ifriend{
             if(isValidSearch(index)){
                 printUserSearchedContact(index);
             }else{
-                System.out.println("\t\tInvalid input...");
+                System.out.println("\t\tNo contact found for " + getUserIn + " ...");
                 System.out.print("Do you want to Search again (Y/N) : ");
                 String yn = input.next();
                 if(yn.equalsIgnoreCase("Y")){
