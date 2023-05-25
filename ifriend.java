@@ -652,7 +652,6 @@ public class ifriend{
         company[company.length-1]=comp;
     }
 
-    //-----!!!!!----Input a company name (No validations)
     public static void printCompanyName(){
         Scanner input = new Scanner(System.in);
         System.out.print("Compnay\t\t\t: ");
@@ -791,13 +790,9 @@ public class ifriend{
             return false;
         }else if (yy < 1800 || yy > year) {
             return false;
-        }else if (mm > 12 || mm < 1) {
+        }else if (mm > month || mm > 12 || mm < 1) {
             return false;
-        }else if (dd > 31 || dd < 1) {
-            return false;
-        }else if (mm > month || dd > day) {
-            return false;
-        }else if (mm == 2 && dd > 29) { // Check for February with leap year
+        }else if (dd > day || dd > 31 || dd < 1) {
             return false;
         }else if (mm == 2 && dd == 29 && !isLeapYear(yy)) { // Check for February 29th and non-leap year
             return false;
