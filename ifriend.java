@@ -397,6 +397,7 @@ public class ifriend{
                     continue L8;
                 } else if (yn.equalsIgnoreCase("N")) {
                     clearConsole();
+                    homePage();
                     break;
                 }
             }else{
@@ -884,14 +885,18 @@ public class ifriend{
             }
         }
 
-        //String[] sProviderCode={"70","71","72","74","75","76","77","78","11","36","31","33","38","34","81","54","51","52","66","91","41","47","21","23","24","63","65","67","26","25","27","32","37","55","57","45","35"};
-        //for(int i=0; i<sProviderCode.length; i++){
-        //   if(phoneNumber.substring(1, 3) != sProviderCode[i]){
-        //   }
-        //    return false;
-        //}
+        if(phoneNumber.length() != 10){
+            return false;
+        }
+        
+        String[] sProviderCode={"70","71","72","74","75","76","77","78","11","36","31","33","38","34","81","54","51","52","66","91","41","47","21","23","24","63","65","67","26","25","27","32","37","55","57","45","35"};
+        for(int i=0; i<sProviderCode.length; i++){
+            if(phoneNumber.substring(1, 3).equals(sProviderCode[i])){
+                return true;
+            }
+        }
 
-        return phoneNumber.length() == 10;
+        return true;
     }
 
     //Extend the company name array
