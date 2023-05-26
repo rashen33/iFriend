@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.print.attribute.standard.PagesPerMinute;
+
 import java.time.*;
 
 public class ifriend{
@@ -897,7 +900,8 @@ public class ifriend{
                     //If the user input is "y" the code runes from the start of the do while loop labeled L1
                     continue L1;
                 }else if(yn.equalsIgnoreCase("N")){
-                    //clearConsole();
+                    clearConsole();
+                    homePage();
                     break;
                 }
             }
@@ -907,7 +911,7 @@ public class ifriend{
     //Validation for the phone number
     public static boolean isValidPhoneNumber(String phoneNumber){
         // Check if the phone number is null or empty
-        if (phoneNumber == null || phoneNumber.isEmpty()) {
+        if (phoneNumber != null || phoneNumber.isEmpty()) {
             return false;
         }
         
@@ -923,14 +927,18 @@ public class ifriend{
             }
         }
 
-        //String[] sProviderCode={"70","71","72","74","75","76","77","78","11","36","31","33","38","34","81","54","51","52","66","91","41","47","21","23","24","63","65","67","26","25","27","32","37","55","57","45","35"};
-        //for(int i=0; i<sProviderCode.length; i++){
-        //   if(phoneNumber.substring(1, 3) != sProviderCode[i]){
-        //   }
-        //    return false;
-        //}
+        if(phoneNumber.length() != 10){
+            return false;
+        }
 
-        return phoneNumber.length() == 10;
+        // String[] sProviderCode={"70","71","72","74","75","76","77","78","11","36","31","33","38","34","81","54","51","52","66","91","41","47","21","23","24","63","65","67","26","25","27","32","37","55","57","45","35"};
+        // for(int i=0; i<sProviderCode.length; i++){
+        //   if(phoneNumber.substring(1, 3).equals(sProviderCode[i])){
+        //     return true;
+        //   }
+        // }
+
+        return true;
     }
 
     //Extend the company name array
