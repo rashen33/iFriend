@@ -51,9 +51,24 @@ public class ifriend{
     
     //Main Menue Print Method
     public static void printMainMenue(){
-        System.out.println("+---------------------------------------------------+");
-		System.out.println("|                    iFRIEND                        |");
-		System.out.println("+---------------------------------------------------+");
+        System.out.println("  \n                /$$ /$$$$$$$$ /$$$$$$$  /$$$$$$ /$$$$$$$$ /$$   /$$ /$$$$$$$ ");
+        System.out.println("                |_/ | $$_____/| $$_  $$|_  $$/| $$_____/| $$$ | $$| $$_  $$");
+        System.out.println("                 /$$| $$      | $$  \\ $$  | $$  | $$      | $$$$| $$| $$  \\ $$");
+        System.out.println("                | $$| $$$$$   | $$$$$$$/   | $$  | $$$$$   | $$ $$ $$| $$  | $$");
+        System.out.println("                | $$| $$_/    | $$_  $$    | $$  | $$__/   | $$  $$$$| $$  | $$");
+        System.out.println("                | $$| $$      | $$  \\ $$  | $$  | $$      | $$\\  $$$| $$  | $$");
+        System.out.println("                | $$| $$      | $$  | $$ /$$$$$$| $$$$$$$$| $$ \\  $$| $$$$$$$/");
+        System.out.println("                |__/|__/      |__/  |__/|______/|________/|__/  \\__/|_______/   \n\n");
+        System.out.println("      _____            _             _          ____                        _              ");
+        System.out.println("     / ____|          | |           | |        / __ \\                      (_)             ");
+        System.out.println("    | |     ___  _ __ | |_ __ _  __| | ___  | |  | |_ __ __ _  __ _ _ __  _ _______ _ __ ");
+        System.out.println("    | |    / _ \\| '_ \\| _/ _` |/ __| __/ __| | |  | | '__/ _` |/ _` | ' \\| |_  / _ \\ '__|");
+        System.out.println("    | |__| (_) | | | | || (_| | (__| | \\_ \\ | |__| | | | (_| | (_| | | | | |/ /  __/ |   ");
+        System.out.println("     \\_____\\___/|_| |_|\\__\\__,_|\\___|\\__|___/  \\____/|_|  \\__, |\\__,_|_| |_|_/___\\___|_|   ");
+        System.out.println("                                                           __/ |                           ");
+        System.out.println("                                                          |___/     \n                       ");
+        System.out.println("===============================================================================================\n\n     ");
+
         System.out.println("[01] ADD Contacts");
 		System.out.println("[02] UPDATE Contacts");
 		System.out.println("[03] DELETE Contacts");
