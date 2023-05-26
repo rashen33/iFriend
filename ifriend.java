@@ -26,7 +26,7 @@ public class ifriend{
             case 2: updateContacts(option); break;
             case 3: deleteContacts(option); break;
             case 4: searchContacts(option); break;
-            //case 5: listContacts(option); break;
+            case 5: listContacts(option); break;
             default: System.out.println("\t\tThank you for using iFriend!");
 
         }
@@ -61,6 +61,118 @@ public class ifriend{
 		System.out.println("[05] LIST Contacts");
 		System.out.println("[06] Exit\n");
         System.out.print("Enter an option to contuniue -> ");
+    }
+    
+    //=====================[05]Methods related to SORT CONTACTS option=======================
+    //Printing the list contacts options and take the user input
+    public static void listContacts(int option){
+        clearConsole();
+        sortContactsPrint();
+        sortContactOptionSelect();
+
+    }
+
+    //======(01)sortByName============
+    public static void SortingByName(){
+        clearConsole();
+        listByNamePrint();
+        listByNameHeaderPrint();
+
+        int n = name.length;
+        
+        // Bubble sort
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (name[j].compareTo(name[j + 1]) > 0) {
+                    // Swap CID
+                    String tempCID = contactID[j];
+                    contactID[j] = contactID[j + 1];
+                    contactID[j + 1] = tempCID;
+                    
+                    // Swap names
+                    String tempName = name[j];
+                    name[j] = name[j + 1];
+                    name[j + 1] = tempName;
+                    
+                    // Swap tpNumber
+                    String tempTP = tpNumber[j];
+                    tpNumber[j] = tpNumber[j + 1];
+                    tpNumber[j + 1] = tempTP;
+
+                    // Swap compnay
+                    String tempCom = company[j];
+                    company[j] = company[j + 1];
+                    company[j + 1] = tempCom;
+
+                    // Swap salaries
+                    double tempSalary = salary[j];
+                    salary[j] = salary[j + 1];
+                    salary[j + 1] = tempSalary;
+                    
+                    // Swap birthdays
+                    String tempBirthday = birthday[j];
+                    birthday[j] = birthday[j + 1];
+                    birthday[j + 1] = tempBirthday;
+
+
+                }
+            }
+        }
+
+        // Print the sorted array
+        for (int i = 0; i < n; i++) {
+            System.out.printf("| %-12s | %-8s | %-14s | %-10s | %-10.2f | %-10s |%n", contactID[i], name[i], tpNumber[i],
+                    company[i], salary[i], birthday[i]);
+        }
+        System.out.println("+--------------+----------+----------------+------------+------------+------------+");
+
+        Scanner input = new Scanner(System.in);
+        System.out.print("Do you want to go to Home Page (Y/N) : ");
+        String yn = input.next();
+        if (yn.equalsIgnoreCase("Y")){
+            clearConsole();
+            homePage();
+        }else if(yn.equalsIgnoreCase("N")){
+            clearConsole();
+        }
+
+    }
+
+    //Header of the sorting table
+    public static void listByNameHeaderPrint(){
+        System.out.println("+--------------+----------+----------------+------------+------------+------------+");
+        System.out.println("|  Contact ID  |   Name   |  Phone Number  |   Company  |   Salary   |  Birthday  |");
+        System.out.println("+--------------+----------+----------------+------------+------------+------------+");
+    }
+
+    public static void listByNamePrint(){
+        System.out.println("\t\t+---------------------------------------------------+");
+        System.out.println("\t\t|               LIST Contact by Name                |");
+        System.out.println("\t\t+---------------------------------------------------+");  
+    }
+    
+    public static void sortContactsPrint(){
+        System.out.println("+---------------------------------------------------+");
+        System.out.println("|                    SORT Contact                   |");
+        System.out.println("+---------------------------------------------------+");         
+        System.out.println("\n");
+        System.out.println("\t[01] Sorting by Name");
+        System.out.println("\t[02] Sorting by Salary");
+        System.out.println("\t[03] Sorting by Birthday");
+        System.out.println("\n");
+    }
+    
+    //Method for taking the user input in the sorting menue
+    public static void sortContactOptionSelect(){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter an option to continue -> ");
+        int opS = input.nextInt();
+
+        switch(opS){
+            case 1: SortingByName(); break;
+            //case 2: listBySalary(); break;
+            //case 3: listByBirthday(); break;
+        }
     }
     
     //=====================[04]Methods related to SEARCH CONTACTS option=======================
