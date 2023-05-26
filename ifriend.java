@@ -346,24 +346,47 @@ public class ifriend{
     }
 
     public static void searchContacts(int option){
-        clearConsole();
-        L1:do{
-            Scanner input = new Scanner(System.in);            
-            searchContactsPrint();
-            String userIn = getUserInput();
-            printSearchedContact(userIn);
-            System.out.println("\n");
-            System.out.print("Do you want to search another contact (Y/N) -> ");
-            String yn = input.next();
-            if(yn.equalsIgnoreCase("Y")){
+        Scanner input = new Scanner(System.in);
+
+        L2:do{
+            L1:do{
                 clearConsole();
-                continue L1;
-            }else if(yn.equalsIgnoreCase("N")){
-                clearConsole();
-                homePage();
-                break;
-            }
+                searchContactsPrint();
+                System.out.print("Search Contact by Name or Phone Number - ");
+                String userInput = input.next();
+                
+                // Search the contact and store the index of that contact
+                int index = searchContacts(userInput);
+        
+                // Checking the validation of the input
+                if (index != -1) {
+                    printUserSearchedContact(index);
+                    System.out.print("Do you want to Search again (Y/N) : ");
+                    String yn = input.next();
+                    if (yn.equalsIgnoreCase("Y")){
+                        continue L1;
+                    }else if (yn.equalsIgnoreCase("N")){
+                        clearConsole();
+                        homePage();
+                        break;
+                    }
+    
+                } else {
+                    System.out.println("\t\tNo contact found for " + userInput + " ...");
+                    System.out.print("Do you want to Search again (Y/N) : ");
+                    String yn = input.next();
+                    if (yn.equalsIgnoreCase("Y")) {
+                        clearConsole();
+                        continue L2;
+                    } else if (yn.equalsIgnoreCase("N")) {
+                        clearConsole();
+                        homePage();
+                        break;
+                    }
+                }
+            }while(true);
         }while(true);
+
     }
 
 
