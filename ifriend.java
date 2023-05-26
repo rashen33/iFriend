@@ -397,6 +397,7 @@ public class ifriend{
                     continue L8;
                 } else if (yn.equalsIgnoreCase("N")) {
                     clearConsole();
+                    homePage();
                     break;
                 }
             }else{
