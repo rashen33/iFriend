@@ -72,11 +72,83 @@ public class ifriend{
 
     }
 
+    //======(01)sortBySalary============
+    public static void SortingBySalary(){
+        clearConsole();
+        listBySalaryPrint();
+        listByHeaderPrint();
+
+        int n = salary.length;
+        
+        // Bubble sort
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (salary[j] > salary[j + 1]) {
+                    // Swap CID
+                    String tempCID = contactID[j];
+                    contactID[j] = contactID[j + 1];
+                    contactID[j + 1] = tempCID;
+                    
+                    // Swap names
+                    String tempName = name[j];
+                    name[j] = name[j + 1];
+                    name[j + 1] = tempName;
+                    
+                    // Swap tpNumber
+                    String tempTP = tpNumber[j];
+                    tpNumber[j] = tpNumber[j + 1];
+                    tpNumber[j + 1] = tempTP;
+
+                    // Swap compnay
+                    String tempCom = company[j];
+                    company[j] = company[j + 1];
+                    company[j + 1] = tempCom;
+
+                    // Swap salaries
+                    double tempSalary = salary[j];
+                    salary[j] = salary[j + 1];
+                    salary[j + 1] = tempSalary;
+                    
+                    // Swap birthdays
+                    String tempBirthday = birthday[j];
+                    birthday[j] = birthday[j + 1];
+                    birthday[j + 1] = tempBirthday;
+
+
+                }
+            }
+        }
+
+        // Print the sorted array
+        for (int i = 0; i < n; i++) {
+            System.out.printf("| %-12s | %-8s | %-14s | %-10s | %-10.2f | %-10s |%n", contactID[i], name[i], tpNumber[i],
+                    company[i], salary[i], birthday[i]);
+        }
+        System.out.println("+--------------+----------+----------------+------------+------------+------------+");
+
+        Scanner input = new Scanner(System.in);
+        System.out.print("Do you want to go to Home Page (Y/N) : ");
+        String yn = input.next();
+        if (yn.equalsIgnoreCase("Y")){
+            clearConsole();
+            homePage();
+        }else if(yn.equalsIgnoreCase("N")){
+            clearConsole();
+        }
+
+    }
+    
+    public static void listBySalaryPrint(){
+        System.out.println("\t\t+---------------------------------------------------+");
+        System.out.println("\t\t|               LIST Contact by Salary              |");
+        System.out.println("\t\t+---------------------------------------------------+");  
+    }
+    
     //======(01)sortByName============
     public static void SortingByName(){
         clearConsole();
         listByNamePrint();
-        listByNameHeaderPrint();
+        listByHeaderPrint();
 
         int n = name.length;
         
@@ -139,7 +211,7 @@ public class ifriend{
     }
 
     //Header of the sorting table
-    public static void listByNameHeaderPrint(){
+    public static void listByHeaderPrint(){
         System.out.println("+--------------+----------+----------------+------------+------------+------------+");
         System.out.println("|  Contact ID  |   Name   |  Phone Number  |   Company  |   Salary   |  Birthday  |");
         System.out.println("+--------------+----------+----------------+------------+------------+------------+");
@@ -170,8 +242,8 @@ public class ifriend{
 
         switch(opS){
             case 1: SortingByName(); break;
-            //case 2: listBySalary(); break;
-            //case 3: listByBirthday(); break;
+            case 2: SortingBySalary(); break;
+            //case 3: SortingByBirthday(); break;
         }
     }
     
