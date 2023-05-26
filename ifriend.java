@@ -51,9 +51,24 @@ public class ifriend{
     
     //Main Menue Print Method
     public static void printMainMenue(){
-        System.out.println("+---------------------------------------------------+");
-		System.out.println("|                    iFRIEND                        |");
-		System.out.println("+---------------------------------------------------+");
+        System.out.println("  \n                /$$ /$$$$$$$$ /$$$$$$$  /$$$$$$ /$$$$$$$$ /$$   /$$ /$$$$$$$ ");
+        System.out.println("                |_/ | $$_____/| $$_  $$|_  $$/| $$_____/| $$$ | $$| $$_  $$");
+        System.out.println("                 /$$| $$      | $$  \\ $$  | $$  | $$      | $$$$| $$| $$  \\ $$");
+        System.out.println("                | $$| $$$$$   | $$$$$$$/   | $$  | $$$$$   | $$ $$ $$| $$  | $$");
+        System.out.println("                | $$| $$_/    | $$_  $$    | $$  | $$__/   | $$  $$$$| $$  | $$");
+        System.out.println("                | $$| $$      | $$  \\ $$  | $$  | $$      | $$\\  $$$| $$  | $$");
+        System.out.println("                | $$| $$      | $$  | $$ /$$$$$$| $$$$$$$$| $$ \\  $$| $$$$$$$/");
+        System.out.println("                |__/|__/      |__/  |__/|______/|________/|__/  \\__/|_______/   \n\n");
+        System.out.println("      _____            _             _          ____                        _              ");
+        System.out.println("     / ____|          | |           | |        / __ \\                      (_)             ");
+        System.out.println("    | |     ___  _ __ | |_ __ _  __| | ___  | |  | |_ __ __ _  __ _ _ __  _ _______ _ __ ");
+        System.out.println("    | |    / _ \\| '_ \\| _/ _` |/ __| __/ __| | |  | | '__/ _` |/ _` | ' \\| |_  / _ \\ '__|");
+        System.out.println("    | |__| (_) | | | | || (_| | (__| | \\_ \\ | |__| | | | (_| | (_| | | | | |/ /  __/ |   ");
+        System.out.println("     \\_____\\___/|_| |_|\\__\\__,_|\\___|\\__|___/  \\____/|_|  \\__, |\\__,_|_| |_|_/___\\___|_|   ");
+        System.out.println("                                                           __/ |                           ");
+        System.out.println("                                                          |___/     \n                       ");
+        System.out.println("===============================================================================================\n\n     ");
+
         System.out.println("[01] ADD Contacts");
 		System.out.println("[02] UPDATE Contacts");
 		System.out.println("[03] DELETE Contacts");
@@ -331,24 +346,47 @@ public class ifriend{
     }
 
     public static void searchContacts(int option){
-        clearConsole();
-        L1:do{
-            Scanner input = new Scanner(System.in);            
-            searchContactsPrint();
-            String userIn = getUserInput();
-            printSearchedContact(userIn);
-            System.out.println("\n");
-            System.out.print("Do you want to search another contact (Y/N) -> ");
-            String yn = input.next();
-            if(yn.equalsIgnoreCase("Y")){
+        Scanner input = new Scanner(System.in);
+
+        L2:do{
+            L1:do{
                 clearConsole();
-                continue L1;
-            }else if(yn.equalsIgnoreCase("N")){
-                clearConsole();
-                homePage();
-                break;
-            }
+                searchContactsPrint();
+                System.out.print("Search Contact by Name or Phone Number - ");
+                String userInput = input.next();
+                
+                // Search the contact and store the index of that contact
+                int index = searchContacts(userInput);
+        
+                // Checking the validation of the input
+                if (index != -1) {
+                    printUserSearchedContact(index);
+                    System.out.print("Do you want to Search again (Y/N) : ");
+                    String yn = input.next();
+                    if (yn.equalsIgnoreCase("Y")){
+                        continue L1;
+                    }else if (yn.equalsIgnoreCase("N")){
+                        clearConsole();
+                        homePage();
+                        break;
+                    }
+    
+                } else {
+                    System.out.println("\t\tNo contact found for " + userInput + " ...");
+                    System.out.print("Do you want to Search again (Y/N) : ");
+                    String yn = input.next();
+                    if (yn.equalsIgnoreCase("Y")) {
+                        clearConsole();
+                        continue L2;
+                    } else if (yn.equalsIgnoreCase("N")) {
+                        clearConsole();
+                        homePage();
+                        break;
+                    }
+                }
+            }while(true);
         }while(true);
+
     }
 
 
